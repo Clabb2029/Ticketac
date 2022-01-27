@@ -8,11 +8,13 @@
 
   <body>
 
-    <%- header %>
+    <%- include('header'); %>
 
     <div class="content">
       <div class="row">
         <div class="col-12 col-sm-6 text-center">
+
+          <!-- Sign-in -->
 
           <div class="formArea">
 
@@ -36,12 +38,14 @@
 
         <div class="col-12 col-sm-6 text-center">
 
+          <!-- Sign-up -->
+
           <div class="formArea">
             <h4 class="titleForm">Sign-up :</h4>
 
             <form action="/users/sign-up" method="POST">
               <div class="form-group">
-                <input name=lastNameFromFront" type="text" class="form-control" placeholder="Name">
+                <input name="lastNameFromFront" type="text" class="form-control" placeholder="Name">
               </div>
               <div class="form-group">
                 <input name="firstNameFromFront" type="text" class="form-control" placeholder="FirstName">

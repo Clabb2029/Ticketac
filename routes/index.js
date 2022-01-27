@@ -1,40 +1,33 @@
 var express = require('express');
 var router = express.Router();
 var journeyModel = require('../models/journey')
+var userModel = require('../models/users')
+
 
 
 /* GET home page. */
+
 router.get('/', function(req, res, next) {
-  res.render('connection', { title: 'Express' });
+  res.render('connection');
 });
 
-// router.get('/home', async function(req, res, next){
-//   if(req.session.user == null){
-//     res.redirect('/')
-//   } else {
-   
+// Page de connexion
 
-//     res.render('home', {cityList})
-//   }
-// });
+router.get('/home', async function(req, res, next){
+  if(req.session.user == null){
+    res.redirect('/')
+  } else {
+    res.render('homepage')
+  }
+});
 
-<<<<<<< HEAD
-  console.log(departure)
-  console.log(arrival)
-  console.log(date)
-  
+// Recherche d'un itinéraire
+
+router.get('/search-journey', async function(req, res, next) {
   res.render('homepage');
 });
 
-router.get('/checkout', function(req, res, next) {
-
-  
-  res.render('checkout');
-=======
-router.get('/add-journey', async function(req, res, next) {
-  res.render('homepage');
->>>>>>> bbc566ad7db155d5f8907c3e9e00218f603a5dfc
-});
+// Affichage des itinéraires avec prix 
 
 router.post('/display-trips', async function(req, res, next) {
   var filter = {}
@@ -50,6 +43,29 @@ router.post('/display-trips', async function(req, res, next) {
 
   var trips = await journeyModel.find(filter);
   res.render('trips', {trips, date: req.body.date})
+});
+
+// Page de checkout - Validation du panier
+
+router.get('/checkout', async function(req, res, next) {
+
+  // Change FindById when session
+  var basket = await userModel.findById('61f2abbeea245b5a9c023356')
+                              .populate('basket')
+                              .exec()
+  
+var item = await journeyModel.findById(req.query.id) 
+console.log(item) 
+basket.basket.push(item._id)
+
+await basket.save();
+
+var basket = await userModel.findById('61f2abbeea245b5a9c023356')
+.populate('basket')
+.exec()
+console.log(basket)
+
+  res.render('checkout', {basket});
 });
 
 module.exports = router;
