@@ -1,0 +1,49 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Personnal style -->
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+    <!-- Import Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Display Trips</title>
+</head>
+<body>
+<% if (trips) { %>
+    <div class="col-8 mx-auto">
+        <h2>Tickets available on : <%= dateFormat(date) %></h2>
+    </div>
+    <div class="col-8 mx-auto">
+        <ul class="d-flex flex-column justify-content-center align-items-center">
+            <% for (let i = 0; i < trips.length; i++) { %>
+                <% if (trips[1].departureTime.replace(':', '') > 1200) {
+                    var time = 'pm'
+                } else {
+                    var time = 'am*'
+                } %>
+
+                <li class="col-8 mx-auto row">
+                    <h4><%= `${trips[i].departure} / ${trips[i].arrival}` %></h4>
+                    <p class="text-secondary">Your departure at : <%= trips[i].departureTime + time %></p>
+                    <h5><%= trips[i].price %>€</h5>
+                    <a href="/checkout?id=<% trips[i]._id %>">
+                        <button>OK</button>
+                    </a>
+                </li>
+            <% } %>
+        </ul>
+    </div>
+<% } else { %>
+<h2>Oops no tran available !</h2>
+<a href="/checkout?id=<% trips[i]._id %>">
+    <button>HomePage</button>
+</a>
+<% } %>
+</body>
+</html>

@@ -8,6 +8,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.get('/add-journey', async function(req, res, next) {
+  res.render('homepage');
+});
+
 router.post('/display-trips', async function(req, res, next) {
   var filter = {}
 
@@ -21,7 +25,7 @@ router.post('/display-trips', async function(req, res, next) {
     filter.date = req.body.date
 
   var trips = await journeyModel.find(filter);
-  res.render('display_trips', {trips, date: req.body.date})
+  res.render('trips', {trips, date: req.body.date})
 });
 
 module.exports = router;
