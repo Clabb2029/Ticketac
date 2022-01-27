@@ -1,0 +1,43 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Last Trips</title>
+</head>
+<body>
+<%- include('header'); %>
+<div class="col-6 mx-auto">
+    <h3 class="ml-5 mb-4">Tickets available on : <%= dateFormat(date) %></h3>
+</div>
+<div class="col-6 mx-auto">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Journey</th>
+            <th scope="col">Departure time</th>
+            <th scope="col">Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for (let i = 0; i < userTrips.last_trips.length; i++) {%>
+            <% let time;
+                if (parseInt(userTrips[i].departureTime.replace(':', '')) > 1200)
+                    time = 'pm'
+                else
+                    time = 'am'
+                %>
+        <tr>
+            <th scope="row"><%= dateFormat(userTrips.last_trips[i].date) %></th>
+            <td><%= `${userTrips.last_trips[i].departure} / ${userTrips.last_trips[i].arrival}` %></td>
+            <td><%= userTrips.last_trips[i].departureTime + time %></td>
+            <td><%= trips[i].price %>€</td>
+        </tr>
+        <% } %>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
