@@ -22,11 +22,12 @@
     <div class="col-6 mx-auto">
         <ul class="list-group">
             <% for (let i = 0; i < trips.length; i++) { %>
-                <% if (parseInt(trips[i].departureTime.replace(':', '')) > 1200) {
-                    var time = 'pm'
+                <% let time;
+                    if (parseInt(trips[i].departureTime.replace(':', '')) > 1200) {
+                    time = 'pm'
                 } else {
                     console.log(parseInt(trips[1].departureTime.replace(':', '')));
-                    var time = 'am'
+                    time = 'am'
                 } %>
 
                 <li class="list-group-item d-flex justify-content-between align-items-center p-4">
