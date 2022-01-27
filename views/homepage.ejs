@@ -15,19 +15,17 @@
         
         <div class="row">
 
-            <div class="col-12 col-lg-4">
+            <div class="col-12 col-sm-6 mx-auto">
 
                 <form action="/add-journey" method="POST">
 
-                    <div class="input-group mb-3">
+                    <div class="input-group">
                         <input name="departure" type="text" class="form-control" placeholder="From Paris, Marseille, ..." >
-                        <input name="arrival" type="text" class="form-control" placeholder="To Lille, Nantes, ..." >
-                        <input type="date" id="date" name="date" value="2018-11-20" min="2018-11-20" max="2018-11-24">
+                        <input name="arrival" type="text" class="form-control mx-4" placeholder="To Lille, Nantes, ..." >
+                        <input type="date" id="date" name="date" class="mr-5" value="2018-11-20" min="2018-11-20" max="2018-11-24">
                 
-                        <div class="input-group-append">
-                            <button class="btn btn-danger" type="submit" id="button-addon2">GO</button>
-                        </div>
-
+                    <div>
+                        <button class="btn btn-danger" type="submit" id="button-addon2">GO</button>
                     </div>
                     
                 </form>

@@ -20,7 +20,13 @@ router.post('/add-journey', async function(req, res, next) {
   console.log(arrival)
   console.log(date)
   
-  res.render('homepage', { title: 'Express' });
+  res.render('homepage');
+});
+
+router.get('/checkout', function(req, res, next) {
+
+  
+  res.render('checkout');
 });
 
 
