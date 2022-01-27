@@ -8,19 +8,17 @@ router.get('/', function(req, res, next) {
   res.render('connection', { title: 'Express' });
 });
 
-// router.get('/home', async function(req, res, next){
-//   if(req.session.user == null){
-//     res.redirect('/')
-//   } else {
-   
-
-//     res.render('home', {cityList})
-//   }
-// });
-
-router.get('/add-journey', async function(req, res, next) {
-  res.render('homepage');
+router.get('/home', async function(req, res, next){
+  if(req.session.user == null){
+    res.redirect('/')
+  } else {
+    res.render('homepage')
+  }
 });
+
+// router.get('/add-journey', async function(req, res, next) {
+//   res.render('homepage');
+// });
 
 router.post('/display-trips', async function(req, res, next) {
   var filter = {}
