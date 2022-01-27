@@ -59,3 +59,11 @@ typings/
 
 # next.js build output
 .next
+
+# Ignore IDE specific files
+.idea/
+.vscode/
+.sw
+
+# Ignore git module
+node_modules
