@@ -28,7 +28,6 @@
                     if (parseInt(trips[i].departureTime.replace(':', '')) > 1200) {
                     time = 'pm'
                 } else {
-                    console.log(parseInt(trips[1].departureTime.replace(':', '')));
                     time = 'am'
                 } %>
 
@@ -39,7 +38,7 @@
                     </div>
                     <div class="row">
                         <h5 class="mr-4"><%= trips[i].price %>€</h5>
-                        <a href="/checkout?id=<% trips[i]._id %>" class="mr-4">
+                        <a href="/checkout?id=<%= trips[i]._id %>" class="mr-4">
                             <button class="btn btn-danger">OK</button>
                         </a>
                     </div>
