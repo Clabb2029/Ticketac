@@ -41,7 +41,7 @@ router.post('/display-trips', async function (req, res, next) {
 router.get('/last-trips', async function (req, res, next) {
    // mettre la l'id du user en session
    let id;
-   let userTrips = await userModel.findById(id).populate('last_trips');
+   let userTrips = await userModel.findById(id).populate('last_trips').exec();
    res.render('last_trips', {userTrips});
 });
 
@@ -52,11 +52,11 @@ router.get('/last-trips', async function (req, res, next) {
  */
 router.get('/checkout-complete', async function (req, res, next) {
    // mettre la page à redirect en req.query.redirect
-   let redirect;
+   let redirect = req.query.redirect;
    // mettre la l'id du user en session
    let id;
-   let userBasket = await userModel.findById(id).populate('basket');
-   let userTrips = await userModel.findbyId(id).populate('last_trips');
+   let userBasket = await userModel.findById(id).populate('basket').exec();
+   let userTrips = await userModel.findbyId(id).populate('last_trips').exec();
 
    for (let i = 0; i < userBasket.basket.length; i++) {
       userTrips.basket.push(userBasket.basket[i]._id);
