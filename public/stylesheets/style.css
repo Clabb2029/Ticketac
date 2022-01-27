@@ -11,6 +11,7 @@ body {
 
 
 /* Navbar */
+
 .navbar {
   margin-bottom: 15vh;
   font-family: 'Poppins';
@@ -45,8 +46,9 @@ body {
 }
 
 footer {
-  color: #FFFFFF;
+  color: #ffffff96;
   font-size: 13px;
+  font-style: italic;
   text-align:center;
   position: fixed;
   bottom:0;
@@ -55,3 +57,18 @@ footer {
   vertical-align:top;
 }
 
+
+
+/* Homepage */
+input.home-form {
+  margin-right: 10px;
+}
+
+#date {
+  border: none;
+}
+
+.bg-image {
+  margin-top: 50px;
+  height: 200px;
+}

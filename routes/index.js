@@ -21,7 +21,6 @@ router.get('/home', async function(req, res, next){
 
 // Recherche d'un itinéraire
 
-
 router.post('/display-trips', async function (req, res, next) {
    var filter = {};
 

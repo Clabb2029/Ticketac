@@ -15,12 +15,11 @@
     <title>Display Trips</title>
 </head>
 <body>
-
-    <%- include('header'); %>
     
+    <%- include('header'); %>
 <% if (trips[0] !== undefined) { %>
-    <div class="col-6 mx-auto">
-        <h3 class="ml-5 mb-4">Tickets available on : <%= dateFormat(date) %></h3>
+    <div class="col-6 mx-auto content">
+        <h3 class="ml-5 mb-4">Tickets available on <%= dateFormat(date) %> :</h3>
     </div>
     <div class="col-6 mx-auto">
         <ul class="list-group">
@@ -55,5 +54,8 @@
         </a>
     </div>
 <% } %>
+<footer>
+    <p>&#169; 2019 LaCapsule</p>
+  </footer>
 </body>
 </html>
