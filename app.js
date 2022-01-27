@@ -1,5 +1,3 @@
-require('./models/connection')
-
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -10,8 +8,23 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var models = require('./routes/index')
 
+var mongoose = require('./models/connection');
+var session = require("express-session");
+
 var app = express();
 
+app.use(
+  session({
+   secret: 'a4f8071f-c873-4447-8ee2',
+   resave: false,
+   saveUninitialized: false,
+  })
+);
+app.locals.dateFormat = function(date){
+  var newDate = new Date(date);
+  var format = newDate.getDate()+'/'+(newDate.getMonth()+1)+'/'+newDate.getFullYear();
+  return format;
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
