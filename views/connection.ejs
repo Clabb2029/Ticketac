@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  </head>
+
+  <body>
+
+    <%- header %>
+
+    <div class="content">
+      <div class="row">
+        <div class="col-12 col-sm-6 text-center">
+
+          <div class="formArea">
+
+            <h4 class="titleForm">Sign-in :</h4>
+
+            <form action="/users/sign-in" method="POST">
+              <div class="form-group">
+                <input name="emailFromFront" type="email" class="form-control" placeholder="Email">
+              </div>
+              <div class="form-group">
+                <input name="passwordFromFront" type="password" class="form-control" placeholder="Password">
+              </div>
+
+              <button type="submit" class="btn btn-danger">Submit</button>
+            </form>
+
+          </div>
+
+        </div>
+
+
+        <div class="col-12 col-sm-6 text-center">
+
+          <div class="formArea">
+            <h4 class="titleForm">Sign-up :</h4>
+
+            <form action="/users/sign-up" method="POST">
+              <div class="form-group">
+                <input name=lastNameFromFront" type="text" class="form-control" placeholder="Name">
+              </div>
+              <div class="form-group">
+                <input name="firstNameFromFront" type="text" class="form-control" placeholder="FirstName">
+              </div>
+              <div class="form-group">
+                <input name="emailFromFront" type="email" class="form-control" placeholder="Email">
+              </div>
+              <div class="form-group">
+                <input name="passwordFromFront" type="password" class="form-control"  placeholder="Password">
+              </div>
+
+              <button type="submit" class="btn btn-danger">Submit</button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>&#169; 2019 LaCapsule</p>
+    </footer>
+
+  </body>
+</html>
