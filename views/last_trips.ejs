@@ -9,9 +9,7 @@
 </head>
 <body>
 <%- include('header'); %>
-<div class="col-6 mx-auto">
-    <h3 class="ml-5 mb-4">Tickets available on : <%= dateFormat(date) %></h3>
-</div>
+
 <div class="col-6 mx-auto">
     <table class="table">
         <thead>
@@ -25,7 +23,7 @@
         <tbody>
         <% for (let i = 0; i < userTrips.last_trips.length; i++) {%>
             <% let time;
-                if (parseInt(userTrips[i].departureTime.replace(':', '')) > 1200)
+                if (parseInt(userTrips.last_trips[i].departureTime.replace(':', '')) > 1200)
                     time = 'pm'
                 else
                     time = 'am'
@@ -34,7 +32,7 @@
             <th scope="row"><%= dateFormat(userTrips.last_trips[i].date) %></th>
             <td><%= `${userTrips.last_trips[i].departure} / ${userTrips.last_trips[i].arrival}` %></td>
             <td><%= userTrips.last_trips[i].departureTime + time %></td>
-            <td><%= trips[i].price %>€</td>
+            <td><%= userTrips.last_trips[i].price %>€</td>
         </tr>
         <% } %>
         </tbody>

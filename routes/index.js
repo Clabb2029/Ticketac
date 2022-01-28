@@ -1,34 +1,35 @@
 var express = require('express');
 var router = express.Router();
-var journeyModel = require('../models/journey')
-var userModel = require('../models/users')
+var journeyModel = require('../models/journey');
+var userModel = require('../models/users');
+
+function capitalizeFirstLetter(string) {
+   return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 /* GET home page. */
-
-router.get('/', function(req, res, next) {
-  res.render('connection');
+router.get('/', function (req, res, next) {
+   res.render('connection');
 });
 
 // Page de connexion
-
-router.get('/home', async function(req, res, next){
-  if(req.session.user == null){
-    res.redirect('/')
-  } else {
-    res.render('homepage')
-  }
+router.get('/home', async function (req, res, next) {
+   if (req.session.user == null) {
+      res.redirect('/');
+   } else {
+      res.render('homepage');
+   }
 });
 
 // Recherche d'un itinéraire
-
 router.post('/display-trips', async function (req, res, next) {
    var filter = {};
 
    if (req.body.departure !== '')
-      filter.departure = req.body.departure;
+      filter.departure = capitalizeFirstLetter(req.body.departure.toString().toLowerCase());
 
    if (req.body.arrival !== '')
-      filter.arrival = req.body.arrival;
+      filter.arrival = capitalizeFirstLetter(req.body.arrival.toString().toLowerCase());
 
    if (req.body.date !== '')
       filter.date = req.body.date;
@@ -41,7 +42,8 @@ router.post('/display-trips', async function (req, res, next) {
 router.get('/last-trips', async function (req, res, next) {
    // mettre la l'id du user en session
    let id;
-   let userTrips = await userModel.findById(id).populate('last_trips').exec();
+   let userTrips = await userModel.findById('61f2ac5aea245b5a9c02335f').populate('last_trips').exec();
+   console.log(userTrips);
    res.render('last_trips', {userTrips});
 });
 
@@ -51,47 +53,51 @@ router.get('/last-trips', async function (req, res, next) {
  * DONT WORK
  */
 router.get('/checkout-complete', async function (req, res, next) {
-   // mettre la page à redirect en req.query.redirect
    let redirect = req.query.redirect;
-   // mettre la l'id du user en session
    let id;
-   let userBasket = await userModel.findById(id).populate('basket').exec();
-   let userTrips = await userModel.findbyId(id).populate('last_trips').exec();
+   let userBasket = await userModel.findById('61f2ac5aea245b5a9c02335f').populate('basket');
+
+   let userTrips = await userModel.findById('61f2ac5aea245b5a9c02335f').populate('last_trips');
+
+   console.log(userBasket);
+
 
    for (let i = 0; i < userBasket.basket.length; i++) {
-      userTrips.basket.push(userBasket.basket[i]._id);
+      await userTrips.last_trips.push(userBasket.basket[i]._id);
    }
-   userBasket.basket.splice(userBasket.basket.length);
+   userBasket.basket.splice(userBasket.length);
+   await userBasket.save();
+   await userTrips.save();
 
    if (redirect === 'home')
-      res.redirect('/search-journey')
-    else if (redirect === 'last-trips')
+      res.redirect('/home');
+   else if (redirect === 'last-trips')
       res.redirect('/last-trips');
-    else
-      res.redirect('/search-journey')
+   else {
+      res.redirect('/home');
+   }
 });
 
 // Page de checkout - Validation du panier
+router.get('/checkout', async function (req, res, next) {
 
-router.get('/checkout', async function(req, res, next) {
+   // Change FindById when session
+   var basket = await userModel.findById('61f2ac5aea245b5a9c02335f')
+      .populate('basket')
+      .exec();
 
-  // Change FindById when session
-  var basket = await userModel.findById('61f2abbeea245b5a9c023356')
-                              .populate('basket')
-                              .exec()
-  
-var item = await journeyModel.findById(req.query.id) 
-console.log(item) 
-basket.basket.push(item._id)
+   var item = await journeyModel.findById(req.query.id);
+   console.log(item);
+   basket.basket.push(item._id);
 
-await basket.save();
+   await basket.save();
 
-var basket = await userModel.findById('61f2abbeea245b5a9c023356')
-.populate('basket')
-.exec()
-console.log(basket)
+   var basket = await userModel.findById('61f2ac5aea245b5a9c02335f')
+      .populate('basket')
+      .exec();
+   console.log(basket);
 
-  res.render('checkout', {basket});
+   res.render('checkout', {basket});
 });
 
 module.exports = router;
