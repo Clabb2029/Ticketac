@@ -18,11 +18,8 @@ router.post('/sign-up', async function(req, res, next) {
     })
   
     var newUserSave = await newUser.save();
-  
-    req.session.user = {
-      name: newUserSave.lastName,
-      id: newUserSave._id,
-    }  
+    req.session.user = newUserSave._id;
+
     res.redirect('/home')
   } else {
     res.redirect('/')
@@ -38,10 +35,8 @@ router.post('/sign-in', async function(req, res, next) {
   })
 
   if(searchUser !=null) {
-    req.session.user = {
-      name: searchUser.lastName,
-      id: searchUser._id
-    }
+    req.session.user = searchUser._id;
+
     res.redirect('/home')
   } else {
     res.render('connection')
@@ -49,9 +44,7 @@ router.post('/sign-in', async function(req, res, next) {
 });
 
 router.get('/logout', async function(req, res, next) {
-
   req.session.user = null;
-
   res.redirect('/')
 })
 

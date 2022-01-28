@@ -40,24 +40,19 @@ router.post('/display-trips', async function (req, res, next) {
 
 /* Affiche les derniers voyages effectués - DONT WORK*/
 router.get('/last-trips', async function (req, res, next) {
-   // mettre la l'id du user en session
-   let id;
-   let userTrips = await userModel.findById('61f2ac5aea245b5a9c02335f').populate('last_trips').exec();
-   console.log(userTrips);
+   let userTrips = await userModel.findById(req.session.user).populate('last_trips').exec();
    res.render('last_trips', {userTrips});
 });
 
 /*
  * BDD- Route servant à vider le basket et à le mettre dans le last_trips
  *  Redirige vers les pages home et last_trips
- * DONT WORK
  */
 router.get('/checkout-complete', async function (req, res, next) {
    let redirect = req.query.redirect;
-   let id;
-   let userBasket = await userModel.findById('61f2ac5aea245b5a9c02335f').populate('basket');
+   let userBasket = await userModel.findById(req.session.user).populate('basket');
 
-   let userTrips = await userModel.findById('61f2ac5aea245b5a9c02335f').populate('last_trips');
+   let userTrips = await userModel.findById(req.session.user).populate('last_trips');
 
    console.log(userBasket);
 
@@ -81,8 +76,7 @@ router.get('/checkout-complete', async function (req, res, next) {
 // Page de checkout - Validation du panier
 router.get('/checkout', async function (req, res, next) {
 
-   // Change FindById when session
-   var basket = await userModel.findById('61f2ac5aea245b5a9c02335f')
+   var basket = await userModel.findById(req.session.user)
       .populate('basket')
       .exec();
 
@@ -92,7 +86,7 @@ router.get('/checkout', async function (req, res, next) {
 
    await basket.save();
 
-   var basket = await userModel.findById('61f2ac5aea245b5a9c02335f')
+   var basket = await userModel.findById(req.session.user)
       .populate('basket')
       .exec();
    console.log(basket);
@@ -101,17 +95,16 @@ router.get('/checkout', async function (req, res, next) {
 });
 
 
-// Route qui sert à supprimer des éléments de son panier 
-
+// Route qui sert à supprimer des éléments de son panier
 router.get('/delete-trip', async function (req, res, next) {
 
-var userBasket = await userModel.findById('61f2abbeea245b5a9c023356').populate('basket').exec();
+var userBasket = await userModel.findById(req.session.user).populate('basket').exec();
 
 newBasket = userBasket.basket.splice(req.query.position, 1)
 
 await userBasket.save();
 
-var basket = await userModel.findById('61f2abbeea245b5a9c023356').populate('basket').exec();
+var basket = await userModel.findById(req.session.user).populate('basket').exec();
 
   res.render('checkout', { basket })
 })
