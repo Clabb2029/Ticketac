@@ -15,16 +15,18 @@
     <title>Display Trips</title>
 </head>
 <body>
-    
-    <%- include('header'); %>
+     
+<%- include('header'); %>
+
+
 <% if (trips[0] !== undefined) {
     var newDate = new Date(date);
     var dateFormat = newDate.getDate()+'/'+(newDate.getMonth()+1);
 %>
-    <div class="col-6 mx-auto content">
-        <h2 class="ml-5 mb-4">Tickets available on <%= dateFormat %> :</h2>
+    <div class="col-12 mx-auto content">
+        <h2 class="ml-2 mb-4">Tickets available on <%= dateFormat %> :</h2>
     </div>
-    <div class="col-6 mx-auto">
+    <div class="col-12 col-sm-10 col-md-6 mx-auto">
         <ul class="list-group">
             <% for (let i = 0; i < trips.length; i++) { %>
                 <% let time;
@@ -34,7 +36,7 @@
                     time = 'am'
                 } %>
 
-                <li class="list-group-item d-flex justify-content-between align-items-center p-4">
+                <li class="col-12 list-group-item d-flex justify-content-between align-items-center p-4">
                     <h4><%= `${trips[i].departure} / ${trips[i].arrival}` %></h4>
                     <div>
                         <p class="text-secondary">Your departure at : <%= trips[i].departureTime + time %></p>
