@@ -8,7 +8,14 @@
 
   <body>
 
-    <%- include('header'); %>
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="../images/train.png" width="25" height="24" class="d-inline-block align-text-top">
+            Ticketac
+          </a>
+      </div>
+  </nav>
 
     <div class="content">
       <div class="row">
@@ -25,7 +32,7 @@
                 <input name="emailFromFront" type="email" class="form-control" placeholder="Email">
               </div>
               <div class="form-group">
-                <input name="passwordFromFront" type="password" class="form-control" placeholder="Password">
+                <input name="passwordFromFront" type="password" class="form-control" placeholder="Password" required>
               </div>
 
               <button type="submit" class="btn btn-danger">Submit</button>
@@ -54,7 +61,7 @@
                 <input name="emailFromFront" type="email" class="form-control" placeholder="Email">
               </div>
               <div class="form-group">
-                <input name="passwordFromFront" type="password" class="form-control"  placeholder="Password">
+                <input name="passwordFromFront" type="password" class="form-control"  placeholder="Password" required>
               </div>
 
               <button type="submit" class="btn btn-danger">Submit</button>
