@@ -94,4 +94,20 @@ console.log(basket)
   res.render('checkout', {basket});
 });
 
+
+// Route qui sert à supprimer des éléments de son panier 
+
+router.get('/delete-trip', async function (req, res, next) {
+
+var userBasket = await userModel.findById('61f2abbeea245b5a9c023356').populate('basket').exec();
+
+newBasket = userBasket.basket.splice(req.query.position, 1)
+
+await userBasket.save();
+
+var basket = await userModel.findById('61f2abbeea245b5a9c023356').populate('basket').exec();
+
+  res.render('checkout', { basket })
+})
+
 module.exports = router;

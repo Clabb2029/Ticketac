@@ -83,3 +83,9 @@ input.home-form {
   color: #FFFFFF !important;
   font-family: 'Poppins';
 }
+
+/* Checkout-page */ 
+
+h6 {
+  color : white
+}
