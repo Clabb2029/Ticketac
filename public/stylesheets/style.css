@@ -6,7 +6,7 @@ body {
   background: linear-gradient(180deg,#c5dee9, #2c7eb2);
   height: 100vh;
   text-align: center;
-  
+   
 }
 
 
@@ -35,6 +35,8 @@ body {
 }
 
 
+/* All pages */
+
 .content {
   color: #FFFFFF;
   font-family: 'Poppins';
@@ -60,6 +62,7 @@ footer {
 
 
 /* Homepage */
+
 input.home-form {
   margin-right: 10px;
 }
@@ -71,4 +74,12 @@ input.home-form {
 .bg-image {
   margin-top: 50px;
   height: 200px;
+}
+
+
+/* Trip page  */
+
+#trip-error {
+  color: #FFFFFF !important;
+  font-family: 'Poppins';
 }
