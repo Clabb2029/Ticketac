@@ -17,9 +17,12 @@
 <body>
     
     <%- include('header'); %>
-<% if (trips[0] !== undefined) { %>
+<% if (trips[0] !== undefined) {
+    var newDate = new Date(date);
+    var dateFormat = newDate.getDate()+'/'+(newDate.getMonth()+1);
+%>
     <div class="col-6 mx-auto content">
-        <h2 class="ml-5 mb-4">Tickets available on <%= dateFormat(date) %> :</h2>
+        <h2 class="ml-5 mb-4">Tickets available on <%= dateFormat %> :</h2>
     </div>
     <div class="col-6 mx-auto">
         <ul class="list-group">
